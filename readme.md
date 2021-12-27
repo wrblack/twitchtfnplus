@@ -13,3 +13,6 @@ Please feel free to use his software or this.
 2. If you pulled this repo and installed requirements via pip, you will need to edit `google_trans_new.py` with these fixes:
     1. L151 - remove `+ ']'` and enclosing parens
     2. L233 - same as above
+
+## Issue with TTS sound play
+1. For Window users, you might need the (k-lite codec pack standard)[https://codecguide.com/download_k-lite_codec_pack_standard.htm].
