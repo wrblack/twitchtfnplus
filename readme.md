@@ -14,5 +14,5 @@ Please feel free to use his software or this.
     1. L151 - remove `+ ']'` and enclosing parens
     2. L233 - same as above
 
-## Issue with TTS sound play
+## Issue with TTS sound play (note you might not need this)
 1. For Window users, you might need the (k-lite codec pack standard)[https://codecguide.com/download_k-lite_codec_pack_standard.htm].
