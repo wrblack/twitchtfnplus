@@ -45,8 +45,16 @@ def main_cleanup():
             rmtree(item)
 
 # sig handler
-def sig_handler(signum, frame) -> None:
-    sys.exit(1)
+def sig_handler(signum, frame):
+    sys.exit()
+
+# cleanup
+def cleanup(bot, my_tts):
+    print('** Cleaning Up **')
+    bot.cleanup() # chatbot cleanup
+    my_tts.stop() # tts thread cleanup
+    # main_cleanup() # _mei cleanup
+    print('** Done Cleaning **')
 
 # Main Entry Point
 def main():
@@ -72,12 +80,7 @@ def main():
     finally:
         signal.signal(signal.SIGTERM, signal.SIG_IGN)
         signal.signal(signal.SIGINT, signal.SIG_IGN)
-        print('** Cleaning Up **')
-        bot.cleanup() # chatbot cleanup
-        my_tts.stop() # tts thread cleanup
-        # main_cleanup() # _mei cleanup
-        time.sleep(3)
-        print('** Done Cleaning **')
+        cleanup(bot, my_tts)
         signal.signal(signal.SIGTERM, signal.SIG_DFL)
         signal.signal(signal.SIGINT, signal.SIG_DFL)
 

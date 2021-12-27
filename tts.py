@@ -30,8 +30,10 @@ class MyTTS:
         self.thread_gTTS.start()
         self.thread_sound.start()
 
+    # stop the queue and clean up
     def stop(self):
         self._stop.isSet()
+        os.rmdir('.\\tmp')
 
     def put(self, in_text, lang_detect):
         self.gTTS_queue.put([in_text, lang_detect])
