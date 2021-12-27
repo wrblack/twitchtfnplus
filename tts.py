@@ -32,8 +32,12 @@ class MyTTS:
 
     # stop the queue and clean up
     def stop(self):
+        print('** [MyTTS] Is stopping and cleaning up...')
         self._stop.isSet()
-        os.rmdir('.\\tmp')
+        try:
+            os.rmdir('.\\tmp')
+        except Exception as e:
+            print(f'**[MyTTS:stop] Error while stopping: {e}')
 
     def put(self, in_text, lang_detect):
         self.gTTS_queue.put([in_text, lang_detect])
