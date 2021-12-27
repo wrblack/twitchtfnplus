@@ -32,12 +32,14 @@ class Bot(commands.Bot):
         loop.create_task(chan.send(msg))
 
     async def event_ready(self):
-        if self.config.Debug: print(f'** [Bot::event_ready] Logged in as {self.nick} **')
-        try:
-            self.send_message(f"/me translator bot is loaded.")
-        except Exception as e:
-            print(f'[Bot::event_ready] Error: {e}')
-            return
+        if self.config.Debug:
+            print(f'** [Bot::event_ready] Bot logged in as {self.nick} **')
+        # ? Issue with using below, sometimes it's not fully loaded
+        # try:
+            # self.send_message(f"/me translator bot is loaded.")
+        # except Exception as e:
+            # print(f'[Bot::event_ready] Error: {e}')
+            # return
 
     def filter_message(self, message):
         # Messages with echo=True are messages by the bot.
@@ -76,7 +78,7 @@ class Bot(commands.Bot):
 
         # Handle TTS
         if self.config.gTTS_In and self.my_tts:
-            self.my_tts.put(message, detected_lang)
+            self.my_tts.put(message.content, detected_lang)
 
         if self.config.gTTS_Out and self.my_tts:
             self.my_tts.put(outgoing_text, detected_lang)
