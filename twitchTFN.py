@@ -5,10 +5,10 @@ import time
 import sys
 import signal
 import importlib
-from chatbot import Bot
 import glob
-# TTS imports
+from chatbot import Bot
 from tts import MyTTS
+from dotenv import load_dotenv
 
 # On first run, attempt to load config.py Module
 try:
@@ -24,7 +24,7 @@ except Exception as e:
     print('[ERROR!] Please make [config.py] and place it in the same directory of twitchTransFN')
     input() # stop for error!!
 
-def main_cleanup():
+def meipass_cleanup():
     try:
         base_path = sys._MEIPASS
     except Exception:
@@ -53,12 +53,21 @@ def cleanup(bot, my_tts):
     print('** Cleaning Up **')
     bot.cleanup() # chatbot cleanup
     my_tts.stop() # tts thread cleanup
-    # main_cleanup() # _mei cleanup
+    # meipass_cleanup() # _mei cleanup
     print('** Done Cleaning **')
 
 # Main Entry Point
 def main():
     signal.signal(signal.SIGTERM, sig_handler)
+
+    # load envfile
+    try:
+        load_dotenv('.env')
+    except Exception as e:
+        print('** There was an error loading the .env file **')
+        print('** Please check for problems in your .env file, if it exists **')
+        print(e)
+        return
 
     #print('twitchTransFreeNext (Version: {})'.format(version))
     print('tTFN+                    : Version 0.1')
