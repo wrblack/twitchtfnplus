@@ -1,0 +1,9 @@
+pyvenv.cfg
+Lib/site-packages/CHANGELOG.md
+Scripts/
+Lib/
+Include/
+config.py
+__pycache__/
+*.code-workspace
+tmp/
