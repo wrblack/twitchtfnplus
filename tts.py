@@ -48,15 +48,31 @@ class MyTTS:
                 if self.read_these_langs and (tl not in self.read_these_langs):
                     continue
 
+                # try creating the mp3
                 try:
                     tts = gTTS(text, lang=tl)
-                    tts_file = '.\\tmp\\cnt_{}.mp3'.format(datetime.now().microsecond)
+                    tts_file = '.\\tmp\\tts-{}.mp3'.format(datetime.now().microsecond)
                     tts.save(tts_file)
-                    playsound(tts_file, True)
-                    os.remove(tts_file)
                 except Exception as e:
                     print('** [TTS::play] TTS sound file not generated **')
+                    print(e)
+                    return
+
+                # try playing the sound
+                try:
+                    playsound(tts_file, True)
+                except Exception as e:
+                    print('** [TTS::play] Error playing generated TTS sound file **')
                     print(e.args)
+                    return
+
+                # finally, try to safely remove file
+                try:
+                    os.remove(tts_file)
+                except Exception as e:
+                    print('** [TTS::play] Error deleting TTS file **')
+                    print(e)
+                    return
 
     def sound_play(self):
         while True:
