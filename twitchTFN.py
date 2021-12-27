@@ -52,25 +52,23 @@ def sig_handler(signum, frame) -> None:
 def main():
     signal.signal(signal.SIGTERM, sig_handler)
 
+    #print('twitchTransFreeNext (Version: {})'.format(version))
+    print('tTFN+                    : Version 0.1')
+    print('Connect to the channel   : {}'.format(config.Twitch_Channel))
+    print('Translator Username      : {}'.format(config.Trans_Username))
+    print('Translator ENGINE        : {}'.format(config.Translator))
+    print('Google Translate         : translate.google.com')
+
     try:
-        #print('twitchTransFreeNext (Version: {})'.format(version))
-        print('tTFN+                    : Version 0.1')
-        print('Connect to the channel   : {}'.format(config.Twitch_Channel))
-        print('Translator Username      : {}'.format(config.Trans_Username))
-        print('Translator ENGINE        : {}'.format(config.Translator))
-        print('Google Translate         : translate.google.com')
         # Spin up the TTS
         my_tts = MyTTS(config.ReadOnlyTheseLang)
-
         # Initiate the twitchio bot
         bot = Bot(config)
         bot.set_tts(my_tts)
         bot.run()
-
     except Exception as e:
         print(e)
         input()
-
     finally:
         signal.signal(signal.SIGTERM, signal.SIG_IGN)
         signal.signal(signal.SIGINT, signal.SIG_IGN)
